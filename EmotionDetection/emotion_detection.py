@@ -6,6 +6,18 @@ def emotion_detector(text_to_analyse):
     payload = { "raw_document": { "text": text_to_analyse } }
 
     response = requests.post(URL, headers=header, json=payload)
+
+    # Task 7: Check for status_code 400 (Blank entries)
+    if response.status_code == 400:
+        return {
+            "anger": None,
+            "disgust": None,
+            "fear": None,
+            "joy": None,
+            "sadness": None,
+            "dominant_emotion": None
+        }
+
     response = response.json()
     confidence_scores = response["emotionPredictions"][0]["emotion"]
 

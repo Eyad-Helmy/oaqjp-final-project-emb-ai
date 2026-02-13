@@ -12,6 +12,10 @@ def call_emotion_detector():
     text = request.args.get("textToAnalyze")
 
     result = emotion_detector(text)
+
+    if result["dominant_emotion"] == None:
+        return "Invalid text! Please try again!"
+        
     response_text = (
         f"For the given statement, the system response is "
         f"'anger': {result['anger']}, 'disgust': {result['disgust']}, "
